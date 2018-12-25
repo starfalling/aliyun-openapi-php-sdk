@@ -17,6 +17,11 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+
+include_once __DIR__ . '/ProductDomain.php';
+include_once __DIR__ . '/Endpoint.php';
+include_once __DIR__ . '/EndpointProvider.php';
+
 $endpoint_filename = dirname(__FILE__) . DIRECTORY_SEPARATOR . "endpoints.xml";
 $xml = simplexml_load_string(file_get_contents($endpoint_filename));
 $json = json_encode($xml);

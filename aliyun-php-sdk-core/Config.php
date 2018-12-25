@@ -17,6 +17,14 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+include_once __DIR__ . '/AcsRequest.php';
+include_once __DIR__ . '/AcsResponse.php';
+include_once __DIR__ . '/RpcAcsRequest.php';
+include_once __DIR__ . '/RoaAcsRequest.php';
+include_once __DIR__ . '/Auth/Credential.php';
+include_once __DIR__ . '/Profile/DefaultProfile.php';
+include_once __DIR__ . '/IAcsClient.php';
+include_once __DIR__ . '/DefaultAcsClient.php';
 include_once 'Autoloader/Autoloader.php';
 include_once 'Regions/EndpointConfig.php';
 include_once 'Regions/LocationService.php';

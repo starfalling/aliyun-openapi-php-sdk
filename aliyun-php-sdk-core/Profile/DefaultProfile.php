@@ -18,6 +18,8 @@
  * under the License.
  */
 
+include_once __DIR__ . '/IClientProfile.php';
+
 define("AUTH_TYPE_RAM_AK", "RAM_AK");
 define("AUTH_TYPE_RAM_ROLE_ARN", "RAM_ROLE_ARN");
 define("AUTH_TYPE_ECS_RAM_ROLE", "ECS_RAM_ROLE");
@@ -31,10 +33,10 @@ class DefaultProfile implements IClientProfile
 	private static $regionId;
 	private static $acceptFormat;
 	private static $authType;
-	
+
 	private static $isigner;
 	private static $iCredential;
-	
+
 	private function  __construct($regionId, $credential, $authType = AUTH_TYPE_RAM_AK, $isigner = null)
 	{
 	    self::$regionId = $regionId;
@@ -42,7 +44,7 @@ class DefaultProfile implements IClientProfile
 	    self::$authType = $authType;
         self::$isigner = $isigner;
 	}
-	
+
 	public static function getProfile($regionId, $accessKeyId, $accessSecret, $securityToken = null)
 	{
 		$credential =new Credential($accessKeyId, $accessSecret, $securityToken);
@@ -75,21 +77,21 @@ class DefaultProfile implements IClientProfile
 	{
 		if(null == self::$isigner)
 		{
-			self::$isigner = new ShaHmac1Signer(); 
+			self::$isigner = new ShaHmac1Signer();
 		}
 		return self::$isigner;
 	}
-	
+
 	public function getRegionId()
 	{
 		return self::$regionId;
 	}
-	
+
 	public function getFormat()
 	{
 		return self::$acceptFormat;
 	}
-	
+
 	public function getCredential()
 	{
 		if(null == self::$credential && null != self::$iCredential)
@@ -116,7 +118,7 @@ class DefaultProfile implements IClientProfile
         }
         return false;
     }
-	
+
 	public static function getEndpoints()
 	{
 		if(null == self::$endpoints)
@@ -125,7 +127,7 @@ class DefaultProfile implements IClientProfile
 		}
 		return self::$endpoints;
 	}
-	
+
 	public static function addEndpoint($endpointName, $regionId, $product, $domain)
 	{
 		if(null == self::$endpoints)
@@ -137,14 +139,14 @@ class DefaultProfile implements IClientProfile
 		{
 			self::addEndpoint_($endpointName, $regionId, $product, $domain);
 		}
-		else 
+		else
 		{
 			self::updateEndpoint($regionId, $product, $domain, $endpoint);
 		}
 
 		LocationService::addEndPoint($regionId, $product, $domain);
 	}
-	
+
 	public static function findEndpointByName($endpointName)
 	{
 		foreach (self::$endpoints as $key => $endpoint)
@@ -155,7 +157,7 @@ class DefaultProfile implements IClientProfile
 			}
 		}
 	}
-	
+
 	private static function addEndpoint_($endpointName,$regionId, $product, $domain)
 	{
 		$regionIds = array($regionId);
@@ -163,7 +165,7 @@ class DefaultProfile implements IClientProfile
 		$endpoint = new Endpoint($endpointName, $regionIds, $productsDomains);
 		array_push(self::$endpoints, $endpoint);
 	}
-	
+
 	private static function updateEndpoint($regionId, $product, $domain, $endpoint)
 	{
 		$regionIds = $endpoint->getRegionIds();
@@ -180,7 +182,7 @@ class DefaultProfile implements IClientProfile
 
         $endpoint->setProductDomains($productDomains);
     }
-    
+
     private static function findProductDomainAndUpdate($productDomains, $product, $domain)
     {
         foreach ($productDomains as $key => $productDomain) {
