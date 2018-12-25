@@ -1,0 +1,11 @@
+{
+    "name": "starfalling/aliyun-openapi-php-sdk",
+    "type": "library",
+    "authors": [
+        {
+            "name": "York.GU",
+            "email": "gyq5319920@gmail.com"
+        }
+    ],
+    "require": {}
+}
