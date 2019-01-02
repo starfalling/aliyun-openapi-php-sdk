@@ -7,10 +7,6 @@
             "email": "gyq5319920@gmail.com"
         }
     ],
-    "autoload" : {
-		"files" : [
-			"aliyun-php-sdk-core/Config.php"
-		]
-	},
+    "autoload" : {},
     "require": {}
 }
