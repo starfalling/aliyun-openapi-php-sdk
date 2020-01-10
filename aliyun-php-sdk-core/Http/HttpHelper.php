@@ -55,9 +55,9 @@ class HttpHelper
         $httpResponse = new HttpResponse();
         $httpResponse->setBody(curl_exec($ch));
         $httpResponse->setStatus(curl_getinfo($ch, CURLINFO_HTTP_CODE));
-        if (curl_errno($ch)) {
-            throw new ClientException("Server unreachable: Errno: " . curl_errno($ch) . " " . curl_error($ch), "SDK.ServerUnreachable");
-        }
+        #if (curl_errno($ch)) {
+        #    throw new ClientException("Server unreachable: Errno: " . curl_errno($ch) . " " . curl_error($ch), "SDK.ServerUnreachable");
+        #}
         curl_close($ch);
         return $httpResponse;
     }
